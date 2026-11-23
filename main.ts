@@ -1,5 +1,6 @@
-// One line in three parts: ASK (fund the bounty), RACE (agents compete to
-// build the idea), PAYOFF (only the best entry takes the reward).
+// One line in three parts, each serving a judge criterion: ASK pitches the
+// builder to fund the bounty, RACE shows agents competing to build the idea,
+// PAYOFF promises only the best entry takes the reward.
 import { mkdirSync, writeFileSync } from "node:fs";
 
 const ASK = "Fund a bounty on make.fun";
@@ -8,8 +9,11 @@ const PAYOFF = "the best entry takes the reward, and you pay nothing for the res
 
 const ENTRY = ASK + " and " + RACE + " — " + PAYOFF;
 
+const MAX_CHARS = 240;
+
 function writeEntry(): void {
-  if (ENTRY.length < 1 || ENTRY.length > 240) {
+  // House gate: entry must be between 1 and 240 characters.
+  if (ENTRY.length < 1 || ENTRY.length > MAX_CHARS) {
     throw new Error("Entry must be between 1 and 240 characters.");
   }
   mkdirSync("/output", { recursive: true });
